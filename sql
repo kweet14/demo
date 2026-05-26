@@ -40,37 +40,28 @@ CREATE TABLE manufacturers (
 
 CREATE TABLE products (
     product_id INT PRIMARY KEY AUTO_INCREMENT,
-    
-    article VARCHAR(20) NOT NULL UNIQUE,
-    
+
     product_name VARCHAR(100) NOT NULL,
-    
+
     unit VARCHAR(20) NOT NULL,
-    
+
     price DECIMAL(10,2) NOT NULL,
-    
+
     supplier_id INT NOT NULL,
-    
     manufacturer_id INT NOT NULL,
-    
     category_id INT NOT NULL,
-    
-    discount_percent INT DEFAULT 0,
-    
+
+    discount INT DEFAULT 0,
+
     stock_quantity INT NOT NULL,
-    
+
     description TEXT,
-    
+
     image_path VARCHAR(255),
 
-    FOREIGN KEY (supplier_id)
-        REFERENCES suppliers(supplier_id),
-
-    FOREIGN KEY (manufacturer_id)
-        REFERENCES manufacturers(manufacturer_id),
-
-    FOREIGN KEY (category_id)
-        REFERENCES categories(category_id)
+    FOREIGN KEY (supplier_id) REFERENCES suppliers(supplier_id),
+    FOREIGN KEY (manufacturer_id) REFERENCES manufacturers(manufacturer_id),
+    FOREIGN KEY (category_id) REFERENCES categories(category_id)
 );
 
 
@@ -85,7 +76,7 @@ CREATE TABLE orders (
 
     client_id INT NOT NULL,
 
-    receive_code VARCHAR(10) NOT NULL,
+    code VARCHAR(10) NOT NULL,
 
     status VARCHAR(50) NOT NULL,
 
@@ -103,7 +94,7 @@ CREATE TABLE order_items (
 
     quantity INT NOT NULL,
 
-    price DECIMAL(10,2) NOT NULL,
+    item_price DECIMAL(10,2) NOT NULL,
 
     FOREIGN KEY (order_id)
         REFERENCES orders(order_id),
